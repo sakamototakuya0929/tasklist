@@ -40,7 +40,7 @@ public class UpdateServlet extends HttpServlet {
 
             // セッションスコープからメッセージのIDを取得して
             // 該当のIDのメッセージ1件のみをデータベースから取得
-            Task task = em.find(Task.class, (Integer)(request.getSession().getAttribute("message_id")));
+            Task task = em.find(Task.class, (Integer)(request.getSession().getAttribute("task_id")));
 
             // フォームの内容を各フィールドに上書き
             String title = request.getParameter("title");
@@ -77,17 +77,7 @@ public class UpdateServlet extends HttpServlet {
                 // indexページへリダイレクト
                 response.sendRedirect(request.getContextPath() + "/index");
             }
-            // データベースを更新
-            em.getTransaction().begin();
-            em.getTransaction().commit();
-            request.getSession().setAttribute("flush", "更新が完了しました。");       // ここを追記
-            em.close();
 
-            // セッションスコープ上の不要になったデータを削除
-            request.getSession().removeAttribute("task_id");
-
-            // indexページへリダイレクト
-            response.sendRedirect(request.getContextPath() + "/index");
         }
     }
 }

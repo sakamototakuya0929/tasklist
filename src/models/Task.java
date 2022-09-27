@@ -37,7 +37,7 @@ public class Task {
     @Column(name = "更新日時", nullable = false)
     private Timestamp updated_at;
 
-    @Column(name = "タスクの内容", length = 255, nullable = false)
+    @Column(name = "content", length = 255, nullable = false)
     private String content;
 
     public Integer getId() {
